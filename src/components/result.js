@@ -7,10 +7,12 @@ export default class result extends React.Component {
     loading: true,
     genres: null,
   }
+  
   async componentDidMount() {
     this.genres = null;
     this.setState({ loading: false });
   }
+
   render() {
     if (this.state.loading) {
       return <div className='state'>loading..</div>

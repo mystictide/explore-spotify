@@ -4,30 +4,19 @@ import authHelpers from '../authHelpers';
 
 export default class search extends React.Component {
 
-  state = {
-    loggedIn: false,
-  }
-
-  async componentDidMount() {
-    let token =  window.localStorage.getItem("spotiToken");
-    if (token) {
-      this.setState({ loggedIn: true });
-    }
-  }
-
   render() {
-    if (!this.state.loggedIn) {
+    if (!this.props.token || this.props.token === "access_denied") {
       return (
         <div className="auth-container">
           <button onClick={search.getAuth} className="auth-link">Login with Spotify</button>
+          {this.props.token === "access_denied" ? <h6>something went wrong, do try again</h6> : ""}
         </div>
       )
-
     }
     else {
       return (
         <div className="search-container">
-          <input type="text" onKeyPress={search.handleKeyPress} name="search" placeholder="explore by genres.." />
+          <input type="text" onKeyPress={search.handleKeyPress} name="search" placeholder="explore by genre.." />
           <button onClick={Result.getRandomUsers} className="random">random genre</button>
         </div>
       )

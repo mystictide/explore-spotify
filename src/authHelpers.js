@@ -12,10 +12,20 @@ const authHelpers = {
       + '&state=' + encodeURIComponent(authCreds.state);
     window.location.href = url;
   },
-  getHashCode: function (hashCode) {
-    let hash = hashCode;
-    hash = hash.substring(1).split("&").find(e => e.startsWith("access_token")).split("=")[1];
-    return hash;
+  getHashCode: function () {
+    let hashParams = new URLSearchParams(window.location.hash.replace("#", "?"));
+    let queryParams = new URLSearchParams(window.location.search.replace("#", "?"));
+    let token = hashParams.get('access_token');
+    let err = queryParams.get('error');
+    if (token) {
+      return token;
+    }
+    else if (err) {
+      return err;
+    }
+    else {
+      return null;
+    }
   },
   getAccessToken: async function (code) {
     await axios({
@@ -32,7 +42,7 @@ const authHelpers = {
     }).then(res => {
       console.log(res);
     })
-  },
+  }
 }
 
 export default authHelpers;

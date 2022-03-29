@@ -11,24 +11,29 @@ function App() {
   const [token, setToken] = useState('');
 
   useEffect(() => {
-    const hashCode = window.location.hash;
+    let hashCode = authHelpers.getHashCode();
     let token = window.localStorage.getItem("spotiToken");
-
     if (!token && hashCode) {
-      token = authHelpers.getHashCode(hashCode);
-
-      window.location.hash = "";
-      window.localStorage.setItem("spotiToken", token);
-      setToken(token);
+      token = authHelpers.getHashCode();
+      if (token) {
+        window.localStorage.setItem("spotiToken", token);
+      }
     }
+    else if (token && hashCode) {
+      token = authHelpers.getHashCode();
+      if (token) {
+        window.localStorage.setItem("spotiToken", token);
+      }
+    }
+    window.location.hash = "";
+    setToken(token);
   }, [])
-
 
   return (
     <div className="page-container">
       <div className='top'>
         <Header title='Explore'></Header>
-        <Search></Search>
+        <Search token={token}></Search>
       </div>
       <div className="main">
         <div className='results-container'>
