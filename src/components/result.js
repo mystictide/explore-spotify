@@ -1,15 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import SpotifyGenres from './spotifyGenres'
+import spotifyHelpers from '../spotifyHelpers';
 
 export default class result extends React.Component {
   state = {
     loading: true,
-    genres: null,
+    tracks: null,
   }
-  
+
   async componentDidMount() {
-    this.genres = null;
+    this.tracks = null;
     this.setState({ loading: false });
   }
 
@@ -17,22 +16,27 @@ export default class result extends React.Component {
     if (this.state.loading) {
       return <div className='state'>loading..</div>
     }
-    return (
-      <div>
-        {/* <div><SpotifyGenres /></div> */}
-      </div>
-    )
+    if (this.props.token && this.props.token !== "access_denied") {
+      return (
+        <div className='funcs'>
+          <button onClick={result.getbyArtists}>Explore by Top Artists</button>
+          <button onClick={result.getbyTracks}>Explore by Top Tracks</button>
+        </div>
+      )
+    }
+    else if (this.props.token && this.props.token === "error") {
+      return (<div className='error'><h5>houston, we have a problem</h5><h5>..let's try again</h5></div>)
+    }
+    else {
+      return ("")
+    }
   }
 }
 
-result.propTypes = {
-  title: PropTypes.string,
+result.getbyArtists = () => {
+  spotifyHelpers.databyTopArtists();
 }
 
-result.getUsers = (username) => {
-  alert(username);
-}
-
-result.getRandomUsers = () => {
-  alert("test");
+result.getbyTracks = () => {
+  spotifyHelpers.databyTopTracks();
 }

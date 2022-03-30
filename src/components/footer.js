@@ -12,7 +12,7 @@ const footer = () => {
 }
 
 footer.goToRepo = () => {
-  let url = 'https://github.com/mystictide'
+  let url = 'https://github.com/mystictide/explore-spotify'
   window.open(url, '_blank');
 }
 

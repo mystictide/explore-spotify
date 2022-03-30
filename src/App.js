@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import authHelpers from './authHelpers';
 import './content/css/App.scss';
+import authHelpers from './authHelpers';
+import spotifyHelpers from './spotifyHelpers';
 import Header from './components/header';
 import Footer from './components/footer';
 import Result from './components/result';
-import Search from './components/search';
+import Login from './components/login';
 
 function App() {
 
   const [token, setToken] = useState('');
+  const [data, setData] = useState('');
 
   useEffect(() => {
+    authHelpers.checkCookie();
     let hashCode = authHelpers.getHashCode();
     let token = authHelpers.getCookie();
     if (!token && hashCode) {
@@ -29,12 +32,12 @@ function App() {
     <div className="page-container">
       <div className='top'>
         <Header title='Explore'></Header>
-        <Search token={token}></Search>
+        <Login token={token}></Login>
       </div>
       <div className="main">
         <div className='results-container'>
           <div className="results">
-            <Result></Result>
+            <Result token={token} data={data}></Result>
           </div>
         </div>
       </div>

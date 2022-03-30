@@ -38,6 +38,15 @@ const authHelpers = {
       return null;
     }
   },
+  checkCookie: function () {
+    if (document.cookie.split(';').some((item) => item.trim().startsWith('spotiToken='))) {
+      return true;
+    }
+    else {
+      localStorage.removeItem("spotiData");
+      return false;
+    }
+  },
   getAccessToken: async function (code) {
     await axios({
       method: 'GET',
