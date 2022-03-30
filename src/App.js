@@ -12,21 +12,17 @@ function App() {
 
   useEffect(() => {
     let hashCode = authHelpers.getHashCode();
-    let token = window.localStorage.getItem("spotiToken");
+    let token = authHelpers.getCookie();
     if (!token && hashCode) {
       token = authHelpers.getHashCode();
-      if (token) {
-        window.localStorage.setItem("spotiToken", token);
-      }
     }
     else if (token && hashCode) {
       token = authHelpers.getHashCode();
-      if (token) {
-        window.localStorage.setItem("spotiToken", token);
-      }
     }
     window.location.hash = "";
-    setToken(token);
+    if (token) {
+      setToken(token);
+    }
   }, [])
 
   return (

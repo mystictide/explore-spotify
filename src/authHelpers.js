@@ -1,4 +1,3 @@
-
 import { authCreds } from './authCreds';
 import axios from "axios";
 
@@ -18,10 +17,22 @@ const authHelpers = {
     let token = hashParams.get('access_token');
     let err = queryParams.get('error');
     if (token) {
+      document.cookie = "spotiToken=" + token + ";max-age=3600;samesite=lax;Secure";
       return token;
     }
     else if (err) {
       return err;
+    }
+    else {
+      return null;
+    }
+  },
+  getCookie: function () {
+    if (document.cookie) {
+      return document.cookie
+        .split('; ')
+        .find(row => row.startsWith('spotiToken='))
+        .split('=')[1];
     }
     else {
       return null;
