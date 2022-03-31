@@ -28,6 +28,6 @@ export const authCreds =
     auth_endpoint: 'https://accounts.spotify.com/authorize',
     response_type: 'token',
     state: generateRandomString(),
-    scope: 'user-read-private user-top-read',
+    scope: 'user-read-private user-top-read playlist-modify-private',
 };
 ```
