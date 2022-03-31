@@ -8,7 +8,7 @@
 
 ## Before you build
 
-For authorization helpers to work, create a ```.js``` file named ```authCreds``` under ```client > src``` with:
+For authorization helpers to work, create a ```.js``` file named ```authCreds``` under ```src``` folder with:
 
 ```
 const charset = "abcdefghijklmnopqrstuvwxyz0123456789";
