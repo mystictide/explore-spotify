@@ -4,6 +4,9 @@
 - (Work in Progress)
 ```
 
+
+View on [GitHub Pages](https://mystictide.github.io/explore-spotify/)
+
 ### Explore Spotify, by your Top Artists & Tracks, create playlists by the recommendations
 
 ## Before you build
