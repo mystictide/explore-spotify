@@ -24,8 +24,7 @@
     -ms-user-select: none;
     user-select: none;
 }
-
-@mixin spoti-button () {
+@mixin spoti-button() {
     background-color: #1db954;
     color: #191414;
     text-decoration: none;
@@ -49,7 +48,6 @@
     box-sizing: border-box;
 }
 html {
-    height: 100%;
     width: 100%;
 }
 body {
@@ -70,7 +68,7 @@ body {
     display: block;
 
     .top {
-        height: 40%;
+        margin-top: 5%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -211,8 +209,10 @@ body {
     }
 
     .main {
-        height: 55%;
+        height: 100%;
         width: 100%;
+        margin-top: 5rem;
+        margin-bottom: 5rem;
 
         .results-container {
             height: 100%;
@@ -220,13 +220,12 @@ body {
             .results {
                 display: flex;
                 justify-content: center;
-               
-                .funcs{
+
+                .funcs {
                     display: block;
-                    button{
+                    button {
                         @include spoti-button();
                         margin: 20px 10px;
-
                     }
                 }
 
@@ -236,15 +235,116 @@ body {
                         text-align: center;
                     }
                 }
+
+                .tracks {
+                    width: 100%;
+
+                    @media (min-width: 760px) {
+                        width: 80%;
+                    }
+                    @media (min-width: 1260px) {
+                        width: 55%;
+                    }
+
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                        list-style-type: none;
+                        .track-info {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: flex-start;
+                            align-items: center;
+                            width: 100%;
+
+                            &:hover {
+                                background-color: #191414;
+                                filter: brightness(135%);
+                                cursor: default;
+                            }
+
+                            .art {
+                                width: 64px;
+                                @include no-select();
+                                img {
+                                    width: 64px;
+                                    height: 64px;
+                                    border-radius: 5px;
+                                }
+                            }
+                            .name {
+                                font-size: 0.8rem;
+
+                                @media (min-width: 760px) {
+                                    font-size: 0.9rem;
+                                }
+                                @media (min-width: 1260px) {
+                                    font-size: 1rem;
+                                }
+
+                                width: 60%;
+                                margin-left: 1rem;
+                                span {
+                                    font-size: 0.7rem;
+
+                                    @media (min-width: 760px) {
+                                        font-size: 0.8rem;
+                                    }
+                                    @media (min-width: 1260px) {
+                                        font-size: 0.9rem;
+                                    }
+
+                                    display: block;
+                                }
+                            }
+
+                            .preview {
+                                @include no-select();
+                                width: 35%;
+                                @media (min-width: 760px) {
+                                    width: 30%;
+                                }
+                                @media (min-width: 1260px) {
+                                    width: 25%;
+                                }
+                                padding: 0;
+                                button {
+                                    @include spoti-button();
+                                    width: 100%;
+                                    font-size: 0.7rem;
+                                }
+                            }
+
+                            .duration {
+                                width: 8%;
+                                @include no-select();
+
+                                font-size: 0.7rem;
+
+                                @media (min-width: 760px) {
+                                    font-size: 0.8rem;
+                                }
+                                @media (min-width: 1260px) {
+                                    font-size: 0.9rem;
+                                }
+                            }
+
+                            li {
+                                padding: 1rem;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
 
     .bottom {
-        position: fixed;
-        bottom: 0;
-        margin-bottom: 8px;
+        display: block;
+        height: 25px;
         width: 100%;
+        position: absolute;
+        top: 5px;
 
         footer {
             display: flex;
@@ -252,6 +352,7 @@ body {
             float: right;
             font-size: 0.65rem;
             margin-right: 1.5rem;
+            margin-bottom: 8px;
             text-align: center;
 
             @include no-select();

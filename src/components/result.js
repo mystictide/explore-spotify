@@ -1,5 +1,6 @@
 import React from 'react'
 import spotifyHelpers from '../spotifyHelpers';
+import Tracks from './tracks';
 
 export default class result extends React.Component {
   state = {
@@ -16,7 +17,12 @@ export default class result extends React.Component {
     if (this.state.loading) {
       return <div className='state'>loading..</div>
     }
-    if (this.props.token && this.props.token !== "access_denied") {
+    if (this.props.data) {
+      return (
+        <Tracks data={this.props.data} ></Tracks>
+      )
+    }
+    else if (this.props.token && this.props.token !== "access_denied") {
       return (
         <div className='funcs'>
           <button onClick={result.getbyArtists}>Explore by Top Artists</button>

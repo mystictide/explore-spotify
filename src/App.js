@@ -26,6 +26,11 @@ function App() {
     if (token) {
       setToken(token);
     }
+    let data = JSON.parse(localStorage.getItem("spotiData"));
+    if (data) {
+      setData(data)
+    }
+    console.log(data)
   }, [])
 
   return (

@@ -2,20 +2,6 @@ import axios from "axios";
 import authHelpers from "./authHelpers";
 
 const spotifyHelpers = {
-    formattedDatabyTracks: async function (data) {
-        let result = {
-            seeds: data[0].seeds,
-            tracks: data[0].tracks,
-        }
-        localStorage.setItem("spotiData", JSON.stringify(result))
-    },
-    formattedDatabyArtists: async function (data) {
-        let result = {
-            seeds: data[0].seeds,
-            tracks: data[0].tracks,
-        }
-        localStorage.setItem("spotiData", JSON.stringify(result))
-    },
     databyTopTracks: async function () {
         let code = authHelpers.getCookie();
         let tracks = await this.getUserTopTracks(code);
@@ -29,6 +15,22 @@ const spotifyHelpers = {
         let seed = await this.getArtistSeed(artists);
         let data = await this.getbyTopArtistsWithSeed(code, seed);
         await this.formattedDatabyArtists(data);
+    },
+    formattedDatabyTracks: async function (data) {
+        let result = {
+            seeds: data[0].seeds,
+            tracks: data[0].tracks,
+        }
+        localStorage.setItem("spotiData", JSON.stringify(result))
+        window.location.reload();
+    },
+    formattedDatabyArtists: async function (data) {
+        let result = {
+            seeds: data[0].seeds,
+            tracks: data[0].tracks,
+        }
+        localStorage.setItem("spotiData", JSON.stringify(result))
+        window.location.reload();
     },
     getTrackSeed: async function (res) {
         let trackSeed = [];

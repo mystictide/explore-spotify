@@ -43,6 +43,7 @@ const authHelpers = {
       return true;
     }
     else {
+      document.cookie = "spotiData=;max-age=0;samesite=lax;Secure";
       localStorage.removeItem("spotiData");
       return false;
     }
