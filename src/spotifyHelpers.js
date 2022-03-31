@@ -106,6 +106,48 @@ const spotifyHelpers = {
         })
         return result;
     },
+    createPlaylist: async function () {
+        let code = authHelpers.getCookie();
+        let uid = authHelpers.getUserID();
+        let pid = "";
+        await axios({
+            method: 'POST',
+            url: 'https://api.spotify.com/v1/users/' + uid + '/playlists',
+            headers: {
+                'Authorization': 'Bearer ' + code,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+                "name": "created by explore-spotify, for " + uid,
+                "public": false,
+            },
+            json: true
+        }).then(res => {
+            pid = res.data.id;
+        })
+        await this.populatePlaylist(code, pid);
+        window.open("https://open.spotify.com/playlist/" + pid, "_blank");
+    },
+    populatePlaylist: async function (code, pid) {
+        let tUris = JSON.parse(localStorage.getItem("spotiData")).tracks.map(t => t.uri);
+        let snapid = "";
+        await axios({
+            method: 'POST',
+            url: 'https://api.spotify.com/v1/playlists/' + pid + '/tracks',
+            headers: {
+                'Authorization': 'Bearer ' + code,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+                "uris": tUris,
+                "position": 0,
+            },
+            json: true
+        }).then(res => {
+            snapid = res;
+        })
+        return snapid;
+    }
 }
 
 export default spotifyHelpers;

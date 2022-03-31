@@ -15,7 +15,7 @@ export default class result extends React.Component {
 
   render() {
     if (this.state.loading) {
-      return <div className='state'>loading..</div>
+      return <div className='results'><div className='state'>loading..</div></div>
     }
     if (this.props.data) {
       return (
@@ -24,14 +24,17 @@ export default class result extends React.Component {
     }
     else if (this.props.token && this.props.token !== "access_denied") {
       return (
-        <div className='funcs'>
-          <button onClick={result.getbyArtists}>Explore by Top Artists</button>
-          <button onClick={result.getbyTracks}>Explore by Top Tracks</button>
+        <div className='results'>
+          <div className='funcs'>
+            <button onClick={result.getbyArtists}>Explore by Top Artists</button>
+            <button onClick={result.getbyTracks}>Explore by Top Tracks</button>
+          </div>
         </div>
       )
     }
     else if (this.props.token && this.props.token === "error") {
-      return (<div className='error'><h5>houston, we have a problem</h5><h5>..let's try again</h5></div>)
+      return (
+        <div className='results'><div className='error'><h5>houston, we have a problem</h5><h5>..let's try again</h5></div></div>)
     }
     else {
       return ("")

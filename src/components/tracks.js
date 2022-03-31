@@ -1,40 +1,52 @@
 import React, { Fragment } from 'react'
-import AudioPlayer from 'react-audio-player';
+import spotifyHelpers from '../spotifyHelpers';
 
 export default class tracks extends React.Component {
     render() {
         return (
-            <div className='tracks'>
-                <ul>
-                    {
-                        this.props.data.tracks
-                            .map(track =>
-                                <Fragment key={track.id}>
-                                    <div className='track-info'>
-                                        {track.album.images[0] ? <li className='art'><img alt="album art" src={track.album.images[2].url}></img></li> : ""}
-                                        <li className='name'>{track.name}
-                                            <span>{track.artists.map((item, index) => ((index ? ', ' : '') + item.name))}</span>
-                                        </li>
-                                        <li className='preview'>
-                                            {track.preview_url ? <button onClick={e => tracks.playPreview(e.target)}>Play Preview</button> : ""}
-                                            {track.preview_url ? <audio loop>
-                                                <source src={track.preview_url} type="audio/mp3"></source>
-                                            </audio> : ""}
-                                        </li>
-                                        <li className='duration'>{tracks.formatDuration(track.duration_ms)}</li>
-                                    </div>
-                                </Fragment>
-                            )
-                    }
-                </ul>
+            <div className="results">
+                <div className='funcs'>
+                    <button onClick={e => tracks.clearData()}>Go back</button>
+                    <button onClick={e => spotifyHelpers.createPlaylist()}>Create a Playlist</button>
+                    <span>listing {this.props.data.tracks.length} recommended tracks</span>
+                </div>
+                <div className='tracks'>
+                    <ul>
+                        {
+                            this.props.data.tracks
+                                .map(track =>
+                                    <Fragment key={track.id}>
+                                        <div className='track-info'>
+                                            {track.album.images[0] ? <li className='art'><img alt="album art" src={track.album.images[2].url}></img></li> : ""}
+                                            <li className='name'>{track.name}
+                                                <span>{track.artists.map((item, index) => ((index ? ', ' : '') + item.name))}</span>
+                                            </li>
+                                            <li className='preview'>
+                                                {track.preview_url ? <button onClick={e => tracks.managePreview(e.target)}>Play Preview</button> : ""}
+                                                {track.preview_url ? <audio loop>
+                                                    <source src={track.preview_url} type="audio/mp3"></source>
+                                                </audio> : ""}
+                                            </li>
+                                            <li className='duration'>{tracks.formatDuration(track.duration_ms)}</li>
+                                        </div>
+                                    </Fragment>
+                                )
+                        }
+                    </ul>
+                </div>
+                <div className='funcs'>
+                    <span>listing {this.props.data.tracks.length} recommended tracks</span>
+                    <button>Go back</button>
+                    <button>Create a Playlist</button>
+                </div>
             </div>
         )
     }
 }
 
-tracks.generateID = (id) => {
-    let rnd = Math.random().toString(36).substring(2, 9);
-    return rnd + id;
+tracks.clearData = () => {
+    localStorage.removeItem("spotiData");
+    window.location.reload();
 }
 
 tracks.formatDuration = (ms) => {
@@ -43,7 +55,7 @@ tracks.formatDuration = (ms) => {
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 }
 
-tracks.playPreview = async (event) => {
+tracks.managePreview = async (event) => {
     let el = event.nextElementSibling;
     if (el.duration > 0 && !el.paused) {
         event.innerHTML = "Play Preview";

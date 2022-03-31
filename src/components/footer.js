@@ -1,6 +1,10 @@
-const footer = () => {
+import authHelpers from "../authHelpers";
+
+const footer = (props) => {
+  const {logged} = props;
   return (
     <footer>
+      {logged ? <div className="logout"><button onClick={e => authHelpers.logout()}>&gt; log out</button></div> : <div className="logout"></div>}
       <div className="github"><button onClick={footer.goToRepo}></button></div>
       <div className="info">
         <div className="spoti">Spotify API is a shy one, so bear with me.</div>

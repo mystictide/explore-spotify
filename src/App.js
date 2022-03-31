@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './content/css/App.scss';
 import authHelpers from './authHelpers';
-import spotifyHelpers from './spotifyHelpers';
 import Header from './components/header';
 import Footer from './components/footer';
 import Result from './components/result';
@@ -30,7 +29,6 @@ function App() {
     if (data) {
       setData(data)
     }
-    console.log(data)
   }, [])
 
   return (
@@ -41,12 +39,10 @@ function App() {
       </div>
       <div className="main">
         <div className='results-container'>
-          <div className="results">
-            <Result token={token} data={data}></Result>
-          </div>
+          <Result token={token} data={data}></Result>
         </div>
       </div>
-      <div className="bottom"><Footer></Footer></div>
+      <div className="bottom"><Footer logged={token ? true : false}></Footer></div>
     </div>
   );
 }

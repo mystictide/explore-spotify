@@ -68,6 +68,9 @@ body {
     display: block;
 
     .top {
+        @media (max-width: 700px) {
+            margin-top: 10%;
+        }
         margin-top: 5%;
         display: flex;
         flex-direction: column;
@@ -220,12 +223,20 @@ body {
             .results {
                 display: flex;
                 justify-content: center;
+                flex-direction: column;
+                align-items: center;
 
                 .funcs {
                     display: block;
+                    @include no-select();
                     button {
                         @include spoti-button();
                         margin: 20px 10px;
+                    }
+                    span {
+                        display: block;
+                        text-align: center;
+                        font-size: 0.7rem;
                     }
                 }
 
@@ -349,10 +360,9 @@ body {
         footer {
             display: flex;
             flex-direction: row;
-            float: right;
             font-size: 0.65rem;
             margin-right: 1.5rem;
-            margin-bottom: 8px;
+            width: 100%;
             text-align: center;
 
             @include no-select();
@@ -361,6 +371,7 @@ body {
                 margin-right: 0.6rem;
                 justify-self: center;
                 align-self: center;
+                flex-grow: 0;
 
                 button {
                     outline: none;
@@ -381,9 +392,37 @@ body {
                 }
             }
 
+            .logout {
+                margin-left: 0.6rem;
+                justify-self: flex-start;
+                align-self: flex-start;
+                text-align: left;
+                flex-grow: 8;
+
+                button {
+                    color: #1db954;
+                    outline: none;
+                    border: none;
+                    background-color: transparent;
+                    width: 4.4rem;
+                    height: 1.4rem;
+                    cursor: pointer;
+                    &:hover {
+                        position: relative;
+                        bottom: 1.5px;
+                        border-radius: 10px;
+                        background-color: #1db954;
+                        color: #191414;
+                        box-shadow: 0 4px 8px 0 rgba(29, 185, 84, 0.5), 0 6px 20px 0 rgba(29, 185, 84, 0.29);
+                    }
+                }
+            }
+
             .info {
                 display: flex;
                 flex-direction: column;
+                flex-grow: 0;
+                margin-right: 0.6rem;
                 .spoti {
                     font-size: 0.6rem;
                 }
