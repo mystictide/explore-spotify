@@ -71,7 +71,7 @@ body {
         @media (max-width: 700px) {
             margin-top: 10%;
         }
-        margin-top: 5%;
+        margin-top: 10%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -121,75 +121,6 @@ body {
             }
         }
 
-        .search-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            row-gap: 15px;
-            width: 100%;
-            margin-top: 1rem;
-
-            input {
-                text-align: center;
-                @media (max-width: 700px) {
-                    width: 50%;
-                }
-                width: 25%;
-                padding: 7px 10px;
-                font-size: 1rem;
-                border: none;
-                border-bottom: 1px solid #1db954;
-                outline: none;
-                background: transparent;
-                color: #1db954;
-                transition: border-bottom 0.2s linear;
-                transition: width 0.2s linear;
-
-                &:focus {
-                    @media (max-width: 700px) {
-                        width: 60%;
-                    }
-                    width: 35%;
-                    border-bottom: 2px dotted #1db954;
-
-                    &::placeholder {
-                        color: transparent;
-                    }
-                }
-
-                &::placeholder {
-                    color: #1db954;
-                    opacity: 1;
-                }
-
-                &::-ms-input-placeholder {
-                    color: #1db954;
-                }
-
-                &::-ms-input-placeholder {
-                    color: #1db954;
-                }
-            }
-            .random {
-                padding: 7px 10px;
-                text-align: center;
-                cursor: pointer;
-                border: none;
-                border-bottom: 1px solid #1db954;
-                border-left: 1px solid #1db954;
-                border-right: 1px solid #1db954;
-                outline: none;
-                background: transparent;
-                color: #1db954;
-                transition: border-bottom 0.2s linear;
-                font-size: 0.9rem;
-                &:hover {
-                    border-bottom: 3px dotted #1db954;
-                }
-            }
-        }
-
         .auth-container {
             display: flex;
             flex-direction: column;
@@ -227,16 +158,100 @@ body {
                 align-items: center;
 
                 .funcs {
-                    display: block;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    flex-wrap: wrap;
+
+                    @media (max-width: 625px) {
+                        flex-direction: column;
+                    }
+                    width: 100%;
                     @include no-select();
+
+                    input {
+                        text-align: center;
+                        // @media (max-width: 700px) {
+                        //     width: 50%;
+                        // }
+                        // width: 25%;
+                        padding: 7px 10px;
+                        font-size: 0.9rem;
+                        border: none;
+                        border-bottom: 1px solid #1db954;
+                        outline: none;
+                        background: transparent;
+                        color: #1db954;
+                        transition: border-bottom 0.2s linear;
+                        transition: padding 0.2s linear;
+                        margin: 20px 30px;
+
+                        &:focus {
+                            padding: 7px 20px;
+                            border-bottom: 2px dotted #1db954;
+
+                            &::placeholder {
+                                color: transparent;
+                            }
+                        }
+
+                        &::placeholder {
+                            color: #1db954;
+                            opacity: 0.8;
+                        }
+
+                        &::-ms-input-placeholder {
+                            color: #1db954;
+                        }
+
+                        &::-ms-input-placeholder {
+                            color: #1db954;
+                        }
+                    }
+
+                    span {
+                        font-size: 0.9rem;
+                        opacity: 0.9;
+                    }
+
                     button {
                         @include spoti-button();
                         margin: 20px 10px;
+
+                        @media (max-width: 625px) {
+                            padding: 10px 35px;
+                        }
                     }
-                    span {
-                        display: block;
-                        text-align: center;
-                        font-size: 0.7rem;
+                }
+
+                .display {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    flex-wrap: wrap;
+
+                    @media (max-width: 625px) {
+                        flex-direction: column;
+                    }
+                    width: 100%;
+                    @include no-select();
+
+                    .selected {
+                        font-size: 0.85rem;
+                        opacity: 0.9;
+                        justify-self: center;
+                        align-self: center;
+                    }
+
+                    .items {
+                        margin: 10px 20px 10px;
+                        padding: 0 15px;
+                        font-size: 0.85rem;
+                        justify-self: center;
+                        align-self: center;
+                        word-break: break-word;
                     }
                 }
 
@@ -296,13 +311,14 @@ body {
                                 width: 60%;
                                 margin-left: 1rem;
                                 span {
-                                    font-size: 0.7rem;
+                                    padding-top: 5px;
+                                    font-size: 0.65rem;
 
                                     @media (min-width: 760px) {
-                                        font-size: 0.8rem;
+                                        font-size: 0.7rem;
                                     }
                                     @media (min-width: 1260px) {
-                                        font-size: 0.9rem;
+                                        font-size: 0.8rem;
                                     }
 
                                     display: block;
@@ -328,6 +344,9 @@ body {
 
                             .duration {
                                 width: 8%;
+                                align-self: center;
+                                justify-self: flex-start;
+                                text-align: left;
                                 @include no-select();
 
                                 font-size: 0.7rem;
@@ -360,7 +379,7 @@ body {
         footer {
             display: flex;
             flex-direction: row;
-            font-size: 0.65rem;
+            font-size: 0.65em;
             margin-right: 1.5rem;
             width: 100%;
             text-align: center;
@@ -376,12 +395,12 @@ body {
                 button {
                     outline: none;
                     border: none;
-                    height: 1.4rem;
-                    width: 1.4rem;
+                    height: 1.3rem;
+                    width: 1.3rem;
                     background: no-repeat;
                     background-position: center;
                     background-image: url("/content/img/icon/GitHub-Mark-Light-64px.png");
-                    background-size: 1.4rem;
+                    background-size: 1.3rem;
                     cursor: pointer;
                     &:hover {
                         position: relative;
@@ -393,7 +412,7 @@ body {
             }
 
             .logout {
-                margin-left: 0.6rem;
+                margin-left: 0.6em;
                 justify-self: flex-start;
                 align-self: flex-start;
                 text-align: left;
@@ -422,9 +441,9 @@ body {
                 display: flex;
                 flex-direction: column;
                 flex-grow: 0;
-                margin-right: 0.6rem;
+                margin-right: 0.55rem;
                 .spoti {
-                    font-size: 0.6rem;
+                    font-size: 0.55rem;
                 }
 
                 .react {

@@ -2,16 +2,16 @@ import axios from "axios";
 import authHelpers from "./authHelpers";
 
 const spotifyHelpers = {
-    databyTopTracks: async function () {
+    databyAllTimeTopTracks: async function (range) {
         let code = authHelpers.getCookie();
-        let tracks = await this.getUserTopTracks(code);
+        let tracks = await this.getUserTopTracks(code, range);
         let seed = await this.getTrackSeed(tracks);
         let data = await this.getbyTopTracksWithSeed(code, seed);
         await this.formattedDatabyTracks(data);
     },
-    databyTopArtists: async function () {
+    databyAllTimeTopArtists: async function (range) {
         let code = authHelpers.getCookie();
-        let artists = await this.getUserTopArtists(code);
+        let artists = await this.getUserTopArtists(code, range);
         let seed = await this.getArtistSeed(artists);
         let data = await this.getbyTopArtistsWithSeed(code, seed);
         await this.formattedDatabyArtists(data);
@@ -46,11 +46,11 @@ const spotifyHelpers = {
         });
         return artistSeed;
     },
-    getUserTopTracks: async function (code) {
+    getUserTopTracks: async function (code, range) {
         let result = [];
         await axios({
             method: 'GET',
-            url: 'https://api.spotify.com/v1/me/top/tracks?limit=5',
+            url: 'https://api.spotify.com/v1/me/top/tracks?limit=5&time_range=' + range,
             headers: {
                 'Authorization': 'Bearer ' + code,
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -61,11 +61,11 @@ const spotifyHelpers = {
         })
         return result;
     },
-    getUserTopArtists: async function (code) {
+    getUserTopArtists: async function (code, range) {
         let result = [];
         await axios({
             method: 'GET',
-            url: 'https://api.spotify.com/v1/me/top/artists?limit=5',
+            url: 'https://api.spotify.com/v1/me/top/artists?limit=5&time_range=' + range,
             headers: {
                 'Authorization': 'Bearer ' + code,
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -109,6 +109,7 @@ const spotifyHelpers = {
     createPlaylist: async function () {
         let code = authHelpers.getCookie();
         let uid = authHelpers.getUserID();
+        let uname = authHelpers.getUsername();
         let pid = "";
         await axios({
             method: 'POST',
@@ -118,7 +119,7 @@ const spotifyHelpers = {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             data: {
-                "name": "created by explore-spotify, for " + uid,
+                "name": "created for " + uname + ", by Explore Spotify",
                 "public": false,
             },
             json: true

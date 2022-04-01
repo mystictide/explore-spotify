@@ -39,7 +39,7 @@ function App() {
       </div>
       <div className="main">
         <div className='results-container'>
-          <Result token={token} data={data}></Result>
+          {token ? <Result token={token} data={data}></Result> : ""}
         </div>
       </div>
       <div className="bottom"><Footer logged={token ? true : false}></Footer></div>
