@@ -2,6 +2,38 @@ import axios from "axios";
 import authHelpers from "./authHelpers";
 
 const spotifyHelpers = {
+    searchArtist: async function (val) {
+        let code = authHelpers.getCookie();
+        let artists = [];
+        await axios({
+            method: 'GET',
+            url: 'https://api.spotify.com/v1/search?q=' + val + "&type=artist&limit=10",
+            headers: {
+                'Authorization': 'Bearer ' + code,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            json: true
+        }).then(res => {
+            artists = res.data.artists.items;
+        })
+        return artists;
+    },
+    searchTrack: async function (val) {
+        let code = authHelpers.getCookie();
+        let tracks = [];
+        await axios({
+            method: 'GET',
+            url: 'https://api.spotify.com/v1/search?q=' + val + "&type=track&limit=10",
+            headers: {
+                'Authorization': 'Bearer ' + code,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            json: true
+        }).then(res => {
+            tracks = res.data.tracks.items;
+        })
+        return tracks;
+    },
     databyAllTimeTopTracks: async function (range) {
         let code = authHelpers.getCookie();
         let tracks = await this.getUserTopTracks(code, range);

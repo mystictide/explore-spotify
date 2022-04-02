@@ -79,9 +79,11 @@ const authHelpers = {
   },
   checkCookie: function () {
     if (document.cookie.split(';').some((item) => item.trim().startsWith('spotiToken='))) {
+      document.cookie = "selection=;max-age=0;samesite=lax;Secure";
       return true;
     }
     else {
+      document.cookie = "selection=;max-age=0;samesite=lax;Secure";
       localStorage.removeItem("spotiData");
       return false;
     }
@@ -90,6 +92,7 @@ const authHelpers = {
     document.cookie = "spotiToken=;max-age=0;samesite=lax;Secure";
     document.cookie = "spotiUID=;max-age=0;samesite=lax;Secure";
     document.cookie = "spotiUN=;max-age=0;samesite=lax;Secure";
+    document.cookie = "Selection=;max-age=0;samesite=lax;Secure";
     localStorage.removeItem("spotiData");
     window.location.reload();
   }

@@ -225,233 +225,278 @@ body {
                     }
                 }
 
-                .display {
+                .search-container {
                     display: flex;
-                    flex-direction: column;
                     justify-content: center;
                     align-items: center;
                     flex-wrap: wrap;
-
-                    @media (max-width: 625px) {
-                        flex-direction: column;
-                    }
                     width: 100%;
-                    @include no-select();
-
-                    .selected {
-                        font-size: 0.85rem;
-                        opacity: 0.9;
-                        justify-self: center;
-                        align-self: center;
-                    }
-
-                    .items {
-                        margin: 10px 20px 10px;
-                        padding: 0 15px;
-                        font-size: 0.85rem;
-                        justify-self: center;
-                        align-self: center;
-                        word-break: break-word;
-                    }
-                }
-
-                .error {
-                    h5 {
-                        margin: 5px;
-                        text-align: center;
-                    }
-                }
-
-                .tracks {
-                    width: 100%;
-
-                    @media (min-width: 760px) {
-                        width: 80%;
-                    }
-                    @media (min-width: 1260px) {
-                        width: 55%;
-                    }
-
                     ul {
+                        justify-content: center;
+                        align-items: center;
                         margin: 0;
-                        padding: 0;
+                        padding: 5px 0;
                         list-style-type: none;
-                        .track-info {
+                        columns: 2;
+                        -webkit-columns: 2;
+                        -moz-columns: 2;
+
+                        .artist-results {
                             display: flex;
-                            flex-direction: row;
-                            justify-content: flex-start;
+                            justify-content: center;
                             align-items: center;
-                            width: 100%;
+                            padding: 2px 0 0 0;
+                            cursor: pointer;
 
-                            &:hover {
-                                background-color: #191414;
-                                filter: brightness(135%);
-                                cursor: default;
-                            }
+                            .item {
+                                display: flex;
+                                justify-content: center;
+                                width: 100%;
+                                padding: 1px 5px;
 
-                            .art {
-                                width: 64px;
-                                @include no-select();
-                                img {
-                                    width: 64px;
-                                    height: 64px;
-                                    border-radius: 5px;
-                                }
-                            }
-                            .name {
-                                font-size: 0.8rem;
-
-                                @media (min-width: 760px) {
-                                    font-size: 0.9rem;
-                                }
-                                @media (min-width: 1260px) {
-                                    font-size: 1rem;
+                                &:hover {
+                                    background-color: #191414;
+                                    filter: brightness(135%);
                                 }
 
-                                width: 60%;
-                                margin-left: 1rem;
-                                span {
-                                    padding-top: 5px;
-                                    font-size: 0.65rem;
+                                .art {
+                                    align-self: center;
+                                    width: 40px;
+                                    @include no-select();
+
+                                    img {
+                                        width: 40px;
+                                        height: 40px;
+                                        border-radius: 5px;
+                                    }
+                                }
+                                .name {
+                                    font-size: 0.8rem;
 
                                     @media (min-width: 760px) {
-                                        font-size: 0.7rem;
+                                        font-size: 0.9rem;
                                     }
                                     @media (min-width: 1260px) {
-                                        font-size: 0.8rem;
+                                        font-size: 1rem;
                                     }
-
-                                    display: block;
+                                    padding: 15px 0;
+                                    width: 100%;
+                                    margin-left: 1rem;
+                                    align-self: center;
                                 }
                             }
 
-                            .preview {
-                                @include no-select();
-                                width: 35%;
+                            .selected {
+                                border-radius: 5px;
+                                color: #191414;
+                                background-color: #1db954;
+                                filter: brightness(55%);
+                                &:hover {
+                                    background-color: #1db954;
+                                    filter: brightness(85%);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .error {
+                h5 {
+                    margin: 5px;
+                    text-align: center;
+                }
+            }
+
+            .tracks {
+                width: 100%;
+
+                @media (min-width: 760px) {
+                    width: 80%;
+                }
+                @media (min-width: 1260px) {
+                    width: 55%;
+                }
+
+                ul {
+                    margin: 0;
+                    padding: 0;
+                    list-style-type: none;
+                    .track-info {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-start;
+                        align-items: center;
+                        width: 100%;
+
+                        &:hover {
+                            background-color: #191414;
+                            filter: brightness(135%);
+                            cursor: default;
+                        }
+
+                        .art {
+                            width: 64px;
+                            @include no-select();
+                            img {
+                                width: 64px;
+                                height: 64px;
+                                border-radius: 5px;
+                            }
+                        }
+                        .name {
+                            font-size: 0.8rem;
+
+                            @media (min-width: 760px) {
+                                font-size: 0.9rem;
+                            }
+                            @media (min-width: 1260px) {
+                                font-size: 1rem;
+                            }
+
+                            width: 60%;
+                            margin-left: 1rem;
+                            span {
+                                padding-top: 5px;
+                                font-size: 0.65rem;
+
                                 @media (min-width: 760px) {
-                                    width: 30%;
-                                }
-                                @media (min-width: 1260px) {
-                                    width: 25%;
-                                }
-                                padding: 0;
-                                button {
-                                    @include spoti-button();
-                                    width: 100%;
                                     font-size: 0.7rem;
                                 }
-                            }
-
-                            .duration {
-                                width: 8%;
-                                align-self: center;
-                                justify-self: flex-start;
-                                text-align: left;
-                                @include no-select();
-
-                                font-size: 0.7rem;
-
-                                @media (min-width: 760px) {
+                                @media (min-width: 1260px) {
                                     font-size: 0.8rem;
                                 }
-                                @media (min-width: 1260px) {
-                                    font-size: 0.9rem;
-                                }
-                            }
 
-                            li {
-                                padding: 1rem;
+                                display: block;
                             }
+                        }
+
+                        .preview {
+                            @include no-select();
+                            width: 35%;
+                            @media (min-width: 760px) {
+                                width: 30%;
+                            }
+                            @media (min-width: 1260px) {
+                                width: 25%;
+                            }
+                            padding: 0;
+                            button {
+                                @include spoti-button();
+                                width: 100%;
+                                font-size: 0.7rem;
+                            }
+                        }
+
+                        .duration {
+                            width: 8%;
+                            align-self: center;
+                            justify-self: flex-start;
+                            text-align: left;
+                            @include no-select();
+
+                            font-size: 0.7rem;
+
+                            @media (min-width: 760px) {
+                                font-size: 0.8rem;
+                            }
+                            @media (min-width: 1260px) {
+                                font-size: 0.9rem;
+                            }
+                        }
+
+                        li {
+                            padding: 1rem;
                         }
                     }
                 }
             }
         }
     }
+}
 
-    .bottom {
-        display: block;
-        height: 25px;
+.bottom {
+    display: block;
+    height: 25px;
+    width: 100%;
+    position: absolute;
+    top: 5px;
+
+    footer {
+        display: flex;
+        flex-direction: row;
+        font-size: 0.65em;
+        margin-right: 1.5rem;
         width: 100%;
-        position: absolute;
-        top: 5px;
+        text-align: center;
 
-        footer {
+        @include no-select();
+
+        .github {
+            margin-right: 0.6rem;
+            justify-self: center;
+            align-self: center;
+            flex-grow: 0;
+
+            button {
+                outline: none;
+                border: none;
+                height: 1.3rem;
+                width: 1.3rem;
+                background: no-repeat;
+                background-position: center;
+                background-image: url("/content/img/icon/GitHub-Mark-Light-64px.png");
+                background-size: 1.3rem;
+                cursor: pointer;
+                &:hover {
+                    position: relative;
+                    bottom: 1.5px;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px 0 rgba(29, 185, 84, 0.5), 0 6px 20px 0 rgba(29, 185, 84, 0.29);
+                }
+            }
+        }
+
+        .logout {
+            margin-left: 0.6em;
+            justify-self: flex-start;
+            align-self: flex-start;
+            text-align: left;
+            flex-grow: 8;
+
+            button {
+                color: #1db954;
+                outline: none;
+                border: none;
+                background-color: transparent;
+                width: 4.4rem;
+                height: 1.4rem;
+                cursor: pointer;
+                &:hover {
+                    position: relative;
+                    bottom: 1.5px;
+                    border-radius: 10px;
+                    background-color: #1db954;
+                    color: #191414;
+                    box-shadow: 0 4px 8px 0 rgba(29, 185, 84, 0.5), 0 6px 20px 0 rgba(29, 185, 84, 0.29);
+                }
+            }
+        }
+
+        .info {
             display: flex;
-            flex-direction: row;
-            font-size: 0.65em;
-            margin-right: 1.5rem;
-            width: 100%;
-            text-align: center;
-
-            @include no-select();
-
-            .github {
-                margin-right: 0.6rem;
-                justify-self: center;
-                align-self: center;
-                flex-grow: 0;
-
-                button {
-                    outline: none;
-                    border: none;
-                    height: 1.3rem;
-                    width: 1.3rem;
-                    background: no-repeat;
-                    background-position: center;
-                    background-image: url("/content/img/icon/GitHub-Mark-Light-64px.png");
-                    background-size: 1.3rem;
-                    cursor: pointer;
-                    &:hover {
-                        position: relative;
-                        bottom: 1.5px;
-                        border-radius: 10px;
-                        box-shadow: 0 4px 8px 0 rgba(29, 185, 84, 0.5), 0 6px 20px 0 rgba(29, 185, 84, 0.29);
-                    }
-                }
+            flex-direction: column;
+            flex-grow: 0;
+            margin-right: 0.55rem;
+            .spoti {
+                font-size: 0.55rem;
             }
 
-            .logout {
-                margin-left: 0.6em;
-                justify-self: flex-start;
-                align-self: flex-start;
-                text-align: left;
-                flex-grow: 8;
-
-                button {
-                    color: #1db954;
-                    outline: none;
-                    border: none;
-                    background-color: transparent;
-                    width: 4.4rem;
-                    height: 1.4rem;
-                    cursor: pointer;
-                    &:hover {
-                        position: relative;
-                        bottom: 1.5px;
-                        border-radius: 10px;
-                        background-color: #1db954;
-                        color: #191414;
-                        box-shadow: 0 4px 8px 0 rgba(29, 185, 84, 0.5), 0 6px 20px 0 rgba(29, 185, 84, 0.29);
-                    }
-                }
-            }
-
-            .info {
-                display: flex;
-                flex-direction: column;
-                flex-grow: 0;
-                margin-right: 0.55rem;
-                .spoti {
-                    font-size: 0.55rem;
-                }
-
-                .react {
-                    h3 {
-                        text-shadow: 1px 1px 2px rgba(29, 185, 84, 0.6);
-                        display: inline-block;
-                        margin: 0;
-                    }
+            .react {
+                h3 {
+                    text-shadow: 1px 1px 2px rgba(29, 185, 84, 0.6);
+                    display: inline-block;
+                    margin: 0;
                 }
             }
         }
