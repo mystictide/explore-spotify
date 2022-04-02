@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 
-export default class artistSearch extends Component {
+export default class trackSearch extends Component {
 
     constructor() {
         super();
@@ -10,7 +10,7 @@ export default class artistSearch extends Component {
         this.selection = [];
     }
 
-    handleArtistSelection = async (e) => {
+    handletrackSelection = async (e) => {
         let val = e.getAttribute('value');
         let index = this.selection.indexOf(val)
         if (index < 0 && this.selection.length < 5) {
@@ -28,19 +28,19 @@ export default class artistSearch extends Component {
     }
 
     toggleSelected = async (e) => {
-        e.parentElement.classList.toggle("selected");
+        e.closest(".item").classList.toggle("selected");
     }
 
     render() {
         return (
-            <Fragment key="artistSearch">
-                <ul className={this.props.artists.length === 1 ? "single" : ""}>
-                    {this.props.artists.map(artist =>
-                        <Fragment key={artist.id}>
-                            <div className='artist-results'>
-                                <div className={this.props.artists.length === 1 ? "single-item" : "item"} onClick={e => this.handleArtistSelection(e.target)}>
-                                    {artist.images[0] ? <li className='art'><img alt="artist art" src={artist.images[2].url}></img></li> : ""}
-                                    <li className='name' value={artist.id}>{artist.name}</li>
+            <Fragment key="trackSearch">
+                <ul>
+                    {this.props.tracks.map(track =>
+                        <Fragment key={track.id}>
+                            <div className='track-results'>
+                                <div className='item' onClick={e => this.handletrackSelection(e.target)}>
+                                    {track.album.images[0] ? <li className='art'><img alt="album art" src={track.album.images[2].url}></img></li> : ""}
+                                    <li className='name' value={track.id}>{track.name}<span value={track.id}>{track.artists.map((item, index) => ((index ? ', ' : '') + item.name))}</span></li>
                                 </div>
                             </div>
                         </Fragment>

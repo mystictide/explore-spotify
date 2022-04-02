@@ -1,17 +1,22 @@
-import React from "react";
+import React, { Fragment } from "react";
 import spotifyHelpers from "../spotifyHelpers";
 import ArtistSearch from "./artistSearch";
+import TrackSearch from "./trackSearch";
 
 export default class functions extends React.Component {
     constructor() {
         super();
         this.state = {
             artistsUpdated: false,
-            tracksUpdated: false
+            tracksUpdated: false,
+            clearResults: false,
         };
         this.timer = null;
         this.artists = null;
         this.tracks = null;
+
+        this.artistInput = React.createRef();
+        this.trackInput = React.createRef();
     }
 
     handleArtistInput = (e) => {
@@ -19,7 +24,14 @@ export default class functions extends React.Component {
             clearTimeout(this.timer);
             this.timer = setTimeout(() => {
                 this.handleArtist(e.value);
+                this.setState({ clearResults: false })
             }, 1000);
+        }
+        else if (!e.value || e.value.length < 1) {
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+                this.setState({ clearResults: true })
+            }, 800);
         }
     }
 
@@ -27,17 +39,28 @@ export default class functions extends React.Component {
         if (e.value) {
             clearTimeout(this.timer);
             this.timer = setTimeout(() => {
-                this.handleArtist(e.value);
+                this.handleTrack(e.value);
+                this.setState({ clearResults: false })
             }, 1000);
+        }
+        else if (!e.value || e.value.length < 1) {
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+                this.setState({ clearResults: true })
+            }, 800);
         }
     }
 
     handleArtist = async (v) => {
+        this.tracks = null;
+        this.trackInput.current.value = "";
         this.artists = await spotifyHelpers.searchArtist(v);
         this.setState({ artistsUpdated: true })
     }
 
     handleTrack = async (v) => {
+        this.artists = null;
+        this.artistInput.current.value = "";
         this.tracks = await spotifyHelpers.searchTrack(v);
         this.setState({ tracksUpdated: true })
     }
@@ -46,15 +69,13 @@ export default class functions extends React.Component {
         return (
             <div className='results'>
                 <div className='funcs'>
-                    <input onChange={e => this.handleArtistInput(e.target)} placeholder="pick at most 5 artists.."></input>
+                    <input onChange={e => this.handleArtistInput(e.target)} placeholder="pick at most 5 artists.." ref={this.artistInput}></input>
                     <span className="selected">and/or</span>
-                    <input onChange={e => this.handleTrackInput(e.target)} placeholder="pick at most 5 tracks.."></input>
+                    <input onChange={e => this.handleTrackInput(e.target)} placeholder="pick at most 5 tracks.." ref={this.trackInput}></input>
                 </div>
-                {this.artists ? <div className='search-container'><ArtistSearch artists={this.artists}></ArtistSearch> </div> : ""}
-                {/* <div className='display'>
-                    <span className="selected">selected</span>
-                    <span className="items" suggestions={}>muse, testing, beardfish, king crimson, habibi, muse, testing, beardfish, king crimson, habibi</span>
-                </div> */}
+                {!this.state.clearResults ? <Fragment> {this.artists ? <div className='search-container'><ArtistSearch artists={this.artists}></ArtistSearch> </div> : ""}
+                    {this.tracks ? <div className='search-container'><TrackSearch tracks={this.tracks}></TrackSearch> </div> : ""}</Fragment> : ""}
+
                 <div className='funcs'>
                     <button onClick={e => functions.getbyArtists("medium_term")}>Explore by Recent Top Artists</button>
                     <button onClick={e => functions.getbyTracks("medium_term")}>Explore by Recent Top Tracks</button>

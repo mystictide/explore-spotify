@@ -5,7 +5,7 @@ const header = () => {
                 <h1>Explore</h1>
                 <div className="logo"></div>
             </div>
-            <div className="secondary"><small>the unknown</small></div>
+            <div className="secondary"><small>recommendations</small></div>
         </div>
     )
 }

@@ -23,7 +23,7 @@ const spotifyHelpers = {
         let tracks = [];
         await axios({
             method: 'GET',
-            url: 'https://api.spotify.com/v1/search?q=' + val + "&type=track&limit=10",
+            url: 'https://api.spotify.com/v1/search?q=' + val + "&type=track&limit=20",
             headers: {
                 'Authorization': 'Bearer ' + code,
                 'Content-Type': 'application/x-www-form-urlencoded'
