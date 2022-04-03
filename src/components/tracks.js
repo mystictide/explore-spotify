@@ -36,7 +36,7 @@ export default class tracks extends React.Component {
                                                         <source src={track.preview_url} type="audio/mp3"></source>
                                                     </audio> : ""}
                                                 </li>
-                                                <li className='duration'>{tracks.formatDuration(track.duration_ms)}</li>
+                                                <li className='duration'><span>{tracks.formatDuration(track.duration_ms)}</span></li>
                                             </div>
                                         </Fragment>
                                     )

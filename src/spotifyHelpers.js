@@ -34,18 +34,30 @@ const spotifyHelpers = {
         })
         return tracks;
     },
+    databySelectedTracks: async function (tracks) {
+        let code = authHelpers.getCookie();
+        let data = await this.getbyTracksWithSeed(code, tracks);
+        document.cookie = "selection=;max-age=0;samesite=lax;Secure";
+        await this.formattedDatabyTracks(data);
+    },
+    databySelectedArtists: async function (artists) {
+        let code = authHelpers.getCookie();
+        let data = await this.getbyArtistsWithSeed(code, artists);
+        document.cookie = "selection=;max-age=0;samesite=lax;Secure";  
+        await this.formattedDatabyArtists(data);
+    },
     databyAllTimeTopTracks: async function (range) {
         let code = authHelpers.getCookie();
         let tracks = await this.getUserTopTracks(code, range);
         let seed = await this.getTrackSeed(tracks);
-        let data = await this.getbyTopTracksWithSeed(code, seed);
+        let data = await this.getbyTracksWithSeed(code, seed);
         await this.formattedDatabyTracks(data);
     },
     databyAllTimeTopArtists: async function (range) {
         let code = authHelpers.getCookie();
         let artists = await this.getUserTopArtists(code, range);
         let seed = await this.getArtistSeed(artists);
-        let data = await this.getbyTopArtistsWithSeed(code, seed);
+        let data = await this.getbyArtistsWithSeed(code, seed);
         await this.formattedDatabyArtists(data);
     },
     formattedDatabyTracks: async function (data) {
@@ -108,7 +120,7 @@ const spotifyHelpers = {
         })
         return result;
     },
-    getbyTopTracksWithSeed: async function (code, trackSeed) {
+    getbyTracksWithSeed: async function (code, trackSeed) {
         let result = [];
         await axios({
             method: 'GET',
@@ -123,7 +135,7 @@ const spotifyHelpers = {
         })
         return result;
     },
-    getbyTopArtistsWithSeed: async function (code, artistSeed) {
+    getbyArtistsWithSeed: async function (code, artistSeed) {
         let result = [];
         await axios({
             method: 'GET',

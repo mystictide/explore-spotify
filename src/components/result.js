@@ -3,8 +3,13 @@ import Tracks from './tracks';
 import Functions from './functions';
 
 export default class result extends React.Component {
-  state = {
-    loading: true,
+
+  constructor() {
+    super();
+    this.state = {
+      loading: true,
+    };
+    this.selection = [];
   }
 
   async componentDidMount() {

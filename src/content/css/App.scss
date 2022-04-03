@@ -1,4 +1,8 @@
 @import "./normalize.css";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap");
+
+$font-mont: "Montserrat", sans-serif;
+$font-sans: sans-serif;
 
 @-moz-keyframes spin {
     100% {
@@ -55,7 +59,8 @@ body {
     width: 100%;
     background-color: #191414;
     color: #1db954;
-    font-family: Sans-Serif;
+    font-family: $font-mont;
+    font-weight: 400;
 }
 #root {
     height: 100%;
@@ -172,10 +177,6 @@ body {
 
                     input {
                         text-align: center;
-                        // @media (max-width: 700px) {
-                        //     width: 50%;
-                        // }
-                        // width: 25%;
                         padding: 7px 10px;
                         font-size: 0.9rem;
                         border: none;
@@ -188,8 +189,9 @@ body {
                         margin: 20px 30px;
 
                         &:focus {
-                            padding: 7px 20px;
-                            border-bottom: 2px dotted #1db954;
+                            padding: 7px 25px;
+                            border-bottom: 4px solid #1db954;
+                            border-radius: 5px;
 
                             &::placeholder {
                                 color: transparent;
@@ -211,7 +213,8 @@ body {
                     }
 
                     span {
-                        font-size: 0.9rem;
+                        font-size: 1.2rem;
+                        align-self: center;
                         opacity: 0.9;
                     }
 
@@ -232,230 +235,276 @@ body {
                     flex-wrap: wrap;
                     width: 100%;
                     @include no-select();
+
                     ul {
-                        display: block;
+                        @media (max-width: 625px) {
+                            display: flex;
+                            flex-direction: column;
+                            width: 100%;
+                        }
+
+                        @media (max-width: 826px) {
+                            width: 75%;
+                        }
+
+                        @media (max-width: 1000px) {
+                            width: 75%;
+                        }
+
+                        display: flex;
+                        flex-direction: row;
                         justify-content: center;
+                        flex-wrap: wrap;
+                        width: 50%;
                         align-items: center;
-                        margin: 0;
+                        margin: 0 auto;
                         padding: 5px 0;
                         list-style-type: none;
                         columns: 2;
                         -webkit-columns: 2;
                         -moz-columns: 2;
 
-                        .artist-results {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            padding: 2px 0 0 0;
-                            cursor: pointer;
-                            width: 100%;
-
-                            .item {
-                                display: flex;
-                                justify-content: center;
+                        li {
+                            @media (max-width: 625px) {
                                 width: 100%;
-                                padding: 1px 5px;
-
-                                &:hover {
-                                    background-color: #191414;
-                                    filter: brightness(135%);
-                                }
-
-                                .art {
-                                    align-self: center;
-                                    width: 40px;
-                                    @include no-select();
-
-                                    img {
-                                        width: 40px;
-                                        height: 40px;
-                                        border-radius: 5px;
-                                        margin-top: 2px;
-                                    }
-                                }
-                                .name {
-                                    font-size: 0.8rem;
-
-                                    @media (min-width: 760px) {
-                                        font-size: 0.9rem;
-                                    }
-                                    @media (min-width: 1260px) {
-                                        font-size: 1rem;
-                                    }
-                                    padding: 15px 0;
-                                    width: 100%;
-                                    margin-left: 1rem;
-                                    align-self: center;
-                                }
                             }
 
-                            .single-item {
+                            @media (max-width: 826px) {
+                                width: 49%;
+                            }
+                            width: 35%;
+
+                            .artist-results {
                                 display: flex;
                                 justify-content: center;
+                                align-items: center;
+                                padding: 2px 0 0 0;
+                                cursor: pointer;
                                 width: 100%;
-                                height: 100px;
-                                padding: 0px 5px;
 
-                                &:hover {
-                                    background-color: #191414;
-                                    filter: brightness(135%);
-                                }
-
-                                .art {
-                                    align-self: center;
-                                    width: 100px;
-                                    @include no-select();
-
-                                    img {
-                                        width: 100px;
-                                        height: 95px;
-                                        border-radius: 5px;
-                                        padding-top: 5px;
-                                    }
-                                }
-                                .name {
-                                    font-size: 0.9rem;
-
-                                    @media (min-width: 760px) {
-                                        font-size: 1rem;
-                                    }
-                                    @media (min-width: 1260px) {
-                                        font-size: 1.1rem;
-                                    }
-                                    height: 100px;
+                                .item {
                                     display: flex;
-                                    align-items: center;
+                                    justify-content: center;
                                     width: 100%;
-                                    padding: 0px 10px;
-                                }
-                            }
+                                    padding: 1px 5px;
 
-                            .selected {
-                                border-radius: 5px;
-                                color: #191414;
-                                background-color: #1db954;
-                                filter: brightness(55%);
-                                &:hover {
-                                    background-color: #1db954;
-                                    filter: brightness(85%);
-                                }
-                            }
-                        }
+                                    &:hover {
+                                        background-color: #191414;
+                                        filter: brightness(135%);
+                                    }
 
-                        .track-results {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            padding: 2px 0 0 0;
-                            cursor: pointer;
-                            width: 100%;
-
-                            .item {
-                                display: flex;
-                                justify-content: center;
-                                width: 90%;
-                                padding: 1px 5px;
-
-                                &:hover {
-                                    background-color: #191414;
-                                    filter: brightness(135%);
-                                }
-
-                                .art {
-                                    align-self: center;
-                                    width: 40px;
-                                    @include no-select();
-
-                                    img {
+                                    .art {
+                                        align-self: center;
                                         width: 40px;
-                                        height: 40px;
-                                        border-radius: 5px;
-                                        margin-top: 2px;
-                                    }
-                                }
-                                .name {
-                                    font-size: 0.8rem;
+                                        @include no-select();
 
-                                    @media (min-width: 760px) {
-                                        font-size: 0.9rem;
+                                        img {
+                                            width: 40px;
+                                            height: 40px;
+                                            border-radius: 5px;
+                                            margin-top: 2px;
+                                        }
                                     }
-                                    @media (min-width: 1260px) {
-                                        font-size: 1rem;
-                                    }
-                                    padding: 15px 0;
-                                    width: 100%;
-                                    margin-left: 1rem;
-                                    align-self: center;
+                                    .name {
+                                        color: #fff;
+                                        opacity: 0.8;
+                                        font-size: 0.8rem;
 
-                                    span {
-                                        padding-top: 5px;
-                                        font-size: 0.6rem;
-        
                                         @media (min-width: 760px) {
-                                            font-size: 0.7rem;
+                                            font-size: 0.9rem;
                                         }
                                         @media (min-width: 1260px) {
-                                            font-size: 0.8rem;
+                                            font-size: 1rem;
                                         }
-        
-                                        display: block;
+                                        padding: 15px 0;
+                                        width: 100%;
+                                        margin-left: 1rem;
+                                        align-self: center;
+                                    }
+                                }
+
+                                .single-item {
+                                    display: flex;
+                                    justify-content: center;
+                                    width: 100%;
+                                    height: 100px;
+                                    padding: 0px 5px;
+
+                                    &:hover {
+                                        background-color: #191414;
+                                        filter: brightness(135%);
+                                    }
+
+                                    .art {
+                                        align-self: center;
+                                        width: 100px;
+                                        @include no-select();
+
+                                        img {
+                                            width: 100px;
+                                            height: 95px;
+                                            border-radius: 5px;
+                                            padding-top: 5px;
+                                        }
+                                    }
+                                    .name {
+                                        color: #fff;
+                                        opacity: 0.8;
+                                        font-size: 0.9rem;
+
+                                        @media (min-width: 760px) {
+                                            font-size: 1rem;
+                                        }
+                                        @media (min-width: 1260px) {
+                                            font-size: 1.1rem;
+                                        }
+                                        height: 100px;
+                                        display: flex;
+                                        align-items: center;
+                                        width: 100%;
+                                        padding: 0px 10px;
+                                    }
+                                }
+
+                                .selected {
+                                    border-radius: 5px;
+                                    color: #191414;
+                                    background-color: #1db954;
+                                    filter: brightness(55%);
+                                    &:hover {
+                                        background-color: #1db954;
+                                        filter: brightness(85%);
                                     }
                                 }
                             }
 
-                            .single-item {
+                            .track-results {
                                 display: flex;
                                 justify-content: center;
+                                align-items: center;
+                                padding: 2px 0 0 0;
+                                cursor: pointer;
                                 width: 100%;
-                                height: 100px;
-                                padding: 0px 5px;
 
-                                &:hover {
-                                    background-color: #191414;
-                                    filter: brightness(135%);
-                                }
-
-                                .art {
-                                    align-self: center;
-                                    width: 100px;
-                                    @include no-select();
-
-                                    img {
-                                        width: 100px;
-                                        height: 95px;
-                                        border-radius: 5px;
-                                        padding-top: 5px;
+                                .item {
+                                    @media (max-width: 625px) {
+                                        min-width: 215px;
+                                        padding: 1px 15px;
                                     }
-                                }
-                                .name {
-                                    font-size: 0.9rem;
 
-                                    @media (min-width: 760px) {
-                                        font-size: 1rem;
-                                    }
-                                    @media (min-width: 1260px) {
-                                        font-size: 1.1rem;
-                                    }
-                                    height: 100px;
                                     display: flex;
-                                    align-items: center;
+                                    justify-content: center;
+                                    padding: 1px 5px;
+                                    word-wrap: break-word;
                                     width: 100%;
-                                    padding: 0px 10px;
-                                    span {
-                                        display: block;
+
+                                    &:hover {
+                                        background-color: #191414;
+                                        filter: brightness(135%);
+                                    }
+
+                                    .art {
+                                        align-self: center;
+                                        width: 40px;
+                                        @include no-select();
+
+                                        img {
+                                            width: 40px;
+                                            height: 40px;
+                                            border-radius: 5px;
+                                            margin-top: 2px;
+                                        }
+                                    }
+                                    .name {
+                                        color: #fff;
+                                        opacity: 0.8;
+                                        font-size: 0.8rem;
+
+                                        @media (min-width: 760px) {
+                                            font-size: 0.9rem;
+                                        }
+                                        @media (min-width: 1260px) {
+                                            font-size: 1rem;
+                                        }
+                                        padding: 15px 0;
+                                        width: 100%;
+                                        margin-left: 1rem;
+                                        align-self: center;
+
+                                        span {
+                                            color: #b3b3b3;
+                                            padding-top: 5px;
+                                            font-size: 0.6rem;
+
+                                            @media (min-width: 760px) {
+                                                font-size: 0.7rem;
+                                            }
+                                            @media (min-width: 1260px) {
+                                                font-size: 0.8rem;
+                                            }
+
+                                            display: block;
+                                        }
                                     }
                                 }
-                            }
 
-                            .selected {
-                                border-radius: 5px;
-                                color: #191414;
-                                background-color: #1db954;
-                                filter: brightness(55%);
-                                &:hover {
+                                .single-item {
+                                    display: flex;
+                                    justify-content: center;
+                                    width: 100%;
+                                    height: 100px;
+                                    padding: 0px 5px;
+
+                                    &:hover {
+                                        background-color: #191414;
+                                        filter: brightness(135%);
+                                    }
+
+                                    .art {
+                                        align-self: center;
+                                        width: 100px;
+                                        @include no-select();
+
+                                        img {
+                                            width: 100px;
+                                            height: 95px;
+                                            border-radius: 5px;
+                                            padding-top: 5px;
+                                        }
+                                    }
+                                    .name {
+                                        font-size: 0.9rem;
+
+                                        @media (min-width: 760px) {
+                                            font-size: 1rem;
+                                        }
+                                        @media (min-width: 1260px) {
+                                            font-size: 1.1rem;
+                                        }
+                                        height: 100px;
+                                        display: flex;
+                                        align-items: center;
+                                        width: 100%;
+                                        padding: 0px 10px;
+                                        span {
+                                            display: block;
+                                        }
+                                    }
+                                }
+
+                                .selected {
+                                    border-radius: 5px;
+                                    color: #fff;
                                     background-color: #1db954;
-                                    filter: brightness(85%);
+                                    filter: brightness(65%);
+
+                                    span {
+                                        color: #fff !important;
+                                    }
+                                    &:hover {
+                                        background-color: #1db954;
+                                        filter: brightness(85%);
+                                    }
                                 }
                             }
                         }
@@ -493,11 +542,15 @@ body {
                         justify-content: flex-start;
                         align-items: center;
                         width: 100%;
+                        color: #fff;
 
                         &:hover {
                             background-color: #191414;
                             filter: brightness(135%);
                             cursor: default;
+                            span {
+                                color: #fff !important;
+                            }
                         }
 
                         .art {
@@ -522,6 +575,7 @@ body {
                             width: 60%;
                             margin-left: 1rem;
                             span {
+                                color: #b3b3b3;
                                 padding-top: 5px;
                                 font-size: 0.65rem;
 
@@ -554,19 +608,22 @@ body {
                         }
 
                         .duration {
-                            width: 8%;
+                            width: 9%;
                             align-self: center;
                             justify-self: flex-start;
-                            text-align: left;
+
                             @include no-select();
+                            span {
+                                color: #b3b3b3;
+                                text-align: left;
+                                font-size: 0.7rem;
 
-                            font-size: 0.7rem;
-
-                            @media (min-width: 760px) {
-                                font-size: 0.8rem;
-                            }
-                            @media (min-width: 1260px) {
-                                font-size: 0.9rem;
+                                @media (min-width: 760px) {
+                                    font-size: 0.8rem;
+                                }
+                                @media (min-width: 1260px) {
+                                    font-size: 0.9rem;
+                                }
                             }
                         }
 
@@ -581,6 +638,7 @@ body {
 }
 
 .bottom {
+    font-family: $font-sans;
     display: block;
     height: 25px;
     width: 100%;

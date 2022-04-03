@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import spotifyHelpers from '../spotifyHelpers';
 
 export default class trackSearch extends Component {
 
@@ -25,32 +26,48 @@ export default class trackSearch extends Component {
             this.toggleSelected(e);
             this.setState({ suggUpdated: true });
         }
+        if (this.selection.length <= 0) {
+            this.clearCookie();
+        }
     }
 
     toggleSelected = async (e) => {
         e.closest(".item").classList.toggle("selected");
     }
 
+    clearCookie = async () => {
+        document.cookie = "selection=;max-age=0;samesite=lax;Secure";
+    }
+
+    getRecommendations = async () => {
+        spotifyHelpers.databySelectedTracks(this.selection);
+    }
+
     render() {
         return (
             <Fragment key="trackSearch">
+                {this.selection.length > 0 ? <div className='funcs'>
+                    <button onClick={e => this.getRecommendations()}>Recommend Tracks</button>
+                </div> : ""}
                 <ul>
                     {this.props.tracks.map(track =>
                         <Fragment key={track.id}>
+                             <li>
                             <div className='track-results'>
                                 <div className='item' onClick={e => this.handletrackSelection(e.target)}>
-                                    {track.album.images[0] ? <li className='art'><img alt="album art" src={track.album.images[2].url}></img></li> : ""}
-                                    <li className='name' value={track.id}>{track.name}<span value={track.id}>{track.artists.map((item, index) => ((index ? ', ' : '') + item.name))}</span></li>
+                                    {track.album.images[0] ? <div className='art'><img alt="album art" src={track.album.images[2].url}></img></div> : ""}
+                                    <p className='name' value={track.id}>{track.name}<span value={track.id}>{track.artists.map((item, index) => ((index ? ', ' : '') + item.name))}</span></p>
                                 </div>
                             </div>
+                            </li>
                         </Fragment>
                     )
                     }
                 </ul>
-                {this.suggestions ? <div className='display'>
+                {/* {this.suggestions ? <div className='display'>
                     <span className="selected">selected</span>
                     <span className="items">{this.suggestions}</span>
-                </div> : ""}
+                </div> : ""} */}
             </Fragment>
         )
     }

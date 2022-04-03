@@ -10,6 +10,7 @@ export default class functions extends React.Component {
             artistsUpdated: false,
             tracksUpdated: false,
             clearResults: false,
+            inputsEmpty: true,
         };
         this.timer = null;
         this.artists = null;
@@ -24,13 +25,15 @@ export default class functions extends React.Component {
             clearTimeout(this.timer);
             this.timer = setTimeout(() => {
                 this.handleArtist(e.value);
-                this.setState({ clearResults: false })
+                this.setState({ clearResults: false })               
+                this.setState({ inputsEmpty: false })
             }, 1000);
         }
         else if (!e.value || e.value.length < 1) {
             clearTimeout(this.timer);
             this.timer = setTimeout(() => {
-                this.setState({ clearResults: true })
+                this.setState({ clearResults: true })          
+                this.setState({ inputsEmpty: true })
             }, 800);
         }
     }
@@ -41,12 +44,14 @@ export default class functions extends React.Component {
             this.timer = setTimeout(() => {
                 this.handleTrack(e.value);
                 this.setState({ clearResults: false })
+                this.setState({ inputsEmpty: false })
             }, 1000);
         }
         else if (!e.value || e.value.length < 1) {
             clearTimeout(this.timer);
             this.timer = setTimeout(() => {
                 this.setState({ clearResults: true })
+                this.setState({ inputsEmpty: true })
             }, 800);
         }
     }
@@ -70,20 +75,21 @@ export default class functions extends React.Component {
             <div className='results'>
                 <div className='funcs'>
                     <input onChange={e => this.handleArtistInput(e.target)} placeholder="pick at most 5 artists.." ref={this.artistInput}></input>
-                    <span className="selected">and/or</span>
+                    <span>OR</span>
                     <input onChange={e => this.handleTrackInput(e.target)} placeholder="pick at most 5 tracks.." ref={this.trackInput}></input>
                 </div>
                 {!this.state.clearResults ? <Fragment> {this.artists ? <div className='search-container'><ArtistSearch artists={this.artists}></ArtistSearch> </div> : ""}
                     {this.tracks ? <div className='search-container'><TrackSearch tracks={this.tracks}></TrackSearch> </div> : ""}</Fragment> : ""}
 
-                <div className='funcs'>
-                    <button onClick={e => functions.getbyArtists("medium_term")}>Explore by Recent Top Artists</button>
-                    <button onClick={e => functions.getbyTracks("medium_term")}>Explore by Recent Top Tracks</button>
-                </div>
-                <div className='funcs'>
-                    <button onClick={e => functions.getbyArtists("long_term")}>Explore by All-Time Top Artists</button>
-                    <button onClick={e => functions.getbyTracks("long_term")}>Explore by All-Time Top Tracks</button>
-                </div>
+                {this.state.inputsEmpty ? <Fragment>
+                    <div className='funcs'>
+                        <button onClick={e => functions.getbyArtists("medium_term")}>Explore by Recent Top Artists</button>
+                        <button onClick={e => functions.getbyTracks("medium_term")}>Explore by Recent Top Tracks</button>
+                    </div>
+                    <div className='funcs'>
+                        <button onClick={e => functions.getbyArtists("long_term")}>Explore by All-Time Top Artists</button>
+                        <button onClick={e => functions.getbyTracks("long_term")}>Explore by All-Time Top Tracks</button>
+                    </div></Fragment> : ""}
             </div>
         )
     }
