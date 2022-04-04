@@ -9,7 +9,10 @@ export default class trackSearch extends Component {
             suggUpdated: false,
         };
         this.selection = [];
+        this.searchResultlist = React.createRef();
     }
+
+    scrollToElement = () => this.searchResultlist.current.scrollIntoView(true, {behavior: "smooth", block: "end", inline: "nearest"});
 
     handletrackSelection = async (e) => {
         let val = e.getAttribute('value');
@@ -49,7 +52,7 @@ export default class trackSearch extends Component {
                 {this.selection.length > 0 ? <div className='funcs'>
                     <button onClick={e => this.getRecommendations()}>Recommend Tracks</button>
                 </div> : ""}
-                <ul>
+                <ul ref={this.searchResultlist} className={this.props.tracks.length === 1 ? "single" : ""}>
                     {this.props.tracks.map(track =>
                         <Fragment key={track.id}>
                              <li>

@@ -9,7 +9,10 @@ export default class artistSearch extends Component {
             suggUpdated: false,
         };
         this.selection = [];
+        this.searchResultlist = React.createRef();
     }
+
+    scrollToElement = () => this.searchResultlist.current.scrollIntoView(true, {behavior: "smooth", block: "end", inline: "nearest"});
 
     handleArtistSelection = async (e) => {
         let val = e.getAttribute('value');
@@ -41,6 +44,7 @@ export default class artistSearch extends Component {
 
     getRecommendations = async () => {
         spotifyHelpers.databySelectedArtists(this.selection);
+        this.scrollToElement();
     }
 
     render() {
@@ -49,7 +53,7 @@ export default class artistSearch extends Component {
                 {this.selection.length > 0 ? <div className='funcs'>
                     <button onClick={e => this.getRecommendations()}>Recommend Tracks</button>
                 </div> : ""}
-                <ul className={this.props.artists.length === 1 ? "single" : ""}>
+                <ul ref={this.searchResultlist} className={this.props.artists.length === 1 ? "single" : ""}>
                     {this.props.artists.map(artist =>
                         <Fragment key={artist.id}>
                             <li>
