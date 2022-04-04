@@ -14,8 +14,7 @@ export default class trackSearch extends Component {
 
     scrollToElement = () => this.searchResultlist.current.scrollIntoView(true, {behavior: "smooth", block: "end", inline: "nearest"});
 
-    handletrackSelection = async (e) => {
-        let val = e.getAttribute('value');
+    handletrackSelection = async (e, val) => {
         let index = this.selection.indexOf(val)
         if (index < 0 && this.selection.length < 5) {
             this.selection.push(val);
@@ -35,7 +34,7 @@ export default class trackSearch extends Component {
     }
 
     toggleSelected = async (e) => {
-        e.closest(".item").classList.toggle("selected");
+        e.classList.toggle("selected");
     }
 
     clearCookie = async () => {
@@ -57,9 +56,9 @@ export default class trackSearch extends Component {
                         <Fragment key={track.id}>
                              <li>
                             <div className='track-results'>
-                                <div className='item' onClick={e => this.handletrackSelection(e.target)}>
+                                <div className='item' onClick={e => this.handletrackSelection(e.target, track.id)}>
                                     {track.album.images[0] ? <div className='art'><img alt="album art" src={track.album.images[2].url}></img></div> : ""}
-                                    <p className='name' value={track.id}>{track.name}<span value={track.id}>{track.artists.map((item, index) => ((index ? ', ' : '') + item.name))}</span></p>
+                                    <p className='name'>{track.name}<span>{track.artists.map((item, index) => ((index ? ', ' : '') + item.name))}</span></p>
                                 </div>
                             </div>
                             </li>

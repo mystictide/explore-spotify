@@ -14,8 +14,7 @@ export default class artistSearch extends Component {
 
     scrollToElement = () => this.searchResultlist.current.scrollIntoView(true, {behavior: "smooth", block: "end", inline: "nearest"});
 
-    handleArtistSelection = async (e) => {
-        let val = e.getAttribute('value');
+    handleArtistSelection = async (e, val) => {
         let index = this.selection.indexOf(val)
         if (index < 0 && this.selection.length < 5) {
             this.selection.push(val);
@@ -35,7 +34,7 @@ export default class artistSearch extends Component {
     }
 
     toggleSelected = async (e) => {
-        e.parentElement.classList.toggle("selected");
+        e.classList.toggle("selected");
     }
 
     clearCookie = async () => {
@@ -56,11 +55,11 @@ export default class artistSearch extends Component {
                 <ul ref={this.searchResultlist} className={this.props.artists.length === 1 ? "single" : ""}>
                     {this.props.artists.map(artist =>
                         <Fragment key={artist.id}>
-                            <li>
+                            <li >
                                 <div className='artist-results'>
-                                    <div className={this.props.artists.length === 1 ? "single-item" : "item"} onClick={e => this.handleArtistSelection(e.target)}>
+                                    <div className={this.props.artists.length === 1 ? "single-item" : "item"} onClick={e => this.handleArtistSelection(e.target, artist.id)}>
                                         {artist.images[0] ? <div className='art'><img alt="artist art" src={artist.images[2].url}></img></div> : ""}
-                                        <p className='name' value={artist.id}>{artist.name}</p>
+                                        <p className='name'>{artist.name}</p>
                                     </div>
                                 </div>
                             </li>

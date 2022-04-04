@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Keyboard} from "react";
 import spotifyHelpers from "../spotifyHelpers";
 import ArtistSearch from "./artistSearch";
 import TrackSearch from "./trackSearch";
@@ -30,6 +30,7 @@ export default class functions extends React.Component {
                 this.handleArtist(e.value);
                 this.setState({ clearResults: false })
                 this.setState({ inputsEmpty: false })
+                e.blur();
             }, 1000);
         }
         else if (!e.value || e.value.length < 1) {
@@ -38,6 +39,7 @@ export default class functions extends React.Component {
                 this.setState({ clearResults: true })
                 this.setState({ inputsEmpty: true })
                 this.setState({ loading: false })
+                e.blur();
             }, 800);
         }
     }
@@ -50,6 +52,7 @@ export default class functions extends React.Component {
                 this.handleTrack(e.value);
                 this.setState({ clearResults: false })
                 this.setState({ inputsEmpty: false })
+                e.blur();
             }, 1000);
         }
         else if (!e.value || e.value.length < 1) {
@@ -58,6 +61,7 @@ export default class functions extends React.Component {
                 this.setState({ clearResults: true })
                 this.setState({ inputsEmpty: true })
                 this.setState({ loading: false })
+                e.blur();
             }, 800);
         }
     }
