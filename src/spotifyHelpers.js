@@ -7,7 +7,7 @@ const spotifyHelpers = {
         let artists = [];
         await axios({
             method: 'GET',
-            url: 'https://api.spotify.com/v1/search?q=' + val + "&type=artist&limit=10",
+            url: 'https://api.spotify.com/v1/search?q=' + val + "&type=artist&limit=18",
             headers: {
                 'Authorization': 'Bearer ' + code,
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -23,7 +23,7 @@ const spotifyHelpers = {
         let tracks = [];
         await axios({
             method: 'GET',
-            url: 'https://api.spotify.com/v1/search?q=' + val + "&type=track&limit=20",
+            url: 'https://api.spotify.com/v1/search?q=' + val + "&type=track&limit=24",
             headers: {
                 'Authorization': 'Bearer ' + code,
                 'Content-Type': 'application/x-www-form-urlencoded'
