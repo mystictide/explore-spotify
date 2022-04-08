@@ -295,12 +295,13 @@ body {
 
                                     .art {
                                         align-self: center;
-                                        width: 40px;
+                                        width: 65px;
+                                        height: 65px;
                                         @include no-select();
                                         pointer-events: none;
                                         img {
-                                            width: 40px;
-                                            height: 40px;
+                                            width: 65px;
+                                            height: 65px;
                                             margin-top: 2px;
                                         }
                                     }
@@ -410,13 +411,14 @@ body {
 
                                     .art {
                                         align-self: center;
-                                        width: 40px;
+                                        width: 65px;
+                                        height: 65px;
                                         @include no-select();
                                         pointer-events: none;
 
                                         img {
-                                            width: 40px;
-                                            height: 40px;
+                                            width: 65px;
+                                            height: 65px;
                                             margin-top: 2px;
                                         }
                                     }
