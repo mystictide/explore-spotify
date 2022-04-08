@@ -58,7 +58,8 @@ export default class trackSearch extends Component {
                             <div className='track-results'>
                                 <div className='item' onClick={e => this.handletrackSelection(e.target, track.id)}>
                                     {track.album.images[0] ? <div className='art'><img alt="album art" src={track.album.images[2].url}></img></div> : ""}
-                                    <p className='name'>{track.name}<span>{track.artists.map((item, index) => ((index ? ', ' : '') + item.name))}</span></p>
+                                    <p className='name'>{track.name}<span>{track.artists.map((item, index) => ((index ? ', ' : '') + item.name))}</span>
+                                    <span className="album">{track.album.name}</span></p>
                                 </div>
                             </div>
                             </li>

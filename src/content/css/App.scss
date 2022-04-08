@@ -109,9 +109,6 @@ body {
                     background-position: center;
                     background-image: url("/content/img/icon/Spotify_Icon_RGB_Green.png");
                     background-size: 2.5rem;
-                    -webkit-animation: spin 9s linear infinite;
-                    -moz-animation: spin 9s linear infinite;
-                    animation: spin 9s linear infinite;
                 }
             }
 
@@ -270,10 +267,8 @@ body {
                             }
 
                             @media (max-width: 826px) {
-                                width: 85%;
+                                width: 90%;
                             }
-
-                            
 
                             padding: 1px 5px;
                             width: 34%;
@@ -410,7 +405,6 @@ body {
                                     width: 100%;
                                     z-index: 9999;
 
-
                                     &:hover {
                                         background-color: #191414;
                                         filter: brightness(135%);
@@ -461,6 +455,9 @@ body {
                                             display: block;
                                             z-index: 1;
                                             pointer-events: none;
+                                        }
+                                        .album {
+                                            font-size: 0.6rem;
                                         }
                                     }
                                 }
@@ -605,6 +602,10 @@ body {
 
                                 display: block;
                             }
+
+                            .album {
+                                font-size: 0.6rem;
+                            }
                         }
 
                         .preview {
@@ -728,6 +729,7 @@ body {
             flex-direction: column;
             flex-grow: 0;
             margin-right: 0.55rem;
+            align-self: center;
 
             .spoti {
                 @media (max-width: 760px) {

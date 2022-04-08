@@ -7,7 +7,7 @@ const footer = (props) => {
       {logged ? <div className="logout"><button onClick={e => authHelpers.logout()}>&gt; log out</button></div> : <div className="logout"></div>}
       <div className="github"><button onClick={footer.goToRepo}></button></div>
       <div className="info">
-        <div className="spoti">Spotify API is a shy one, so bear with me.</div>
+        {/* <div className="spoti">Spotify API is a shy one, so bear with me.</div> */}
         <div className="react">made with <h3 onClick={footer.goToReact}>React</h3>.. and some <h2>☕</h2></div>
       </div>
 
