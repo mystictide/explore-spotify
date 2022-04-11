@@ -617,8 +617,13 @@ body {
                             padding: 0;
                             button {
                                 @include spoti-button();
+                                @media (max-width: 760px) {
+                                    padding: 10px 7px;
+                                    font-size: 0.6rem;
+                                }
                                 width: 100%;
                                 font-size: 0.7rem;
+                                padding: 10px 29px;
                             }
                         }
 
