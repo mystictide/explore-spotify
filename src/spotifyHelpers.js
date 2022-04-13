@@ -162,6 +162,13 @@ const spotifyHelpers = {
     let code = authHelpers.getCookie();
     let uid = authHelpers.getUserID();
     let uname = authHelpers.getUsername();
+    let pname = "";
+    if (uname) {
+      pname = "created for " + uname + ", by Explore Spotify";
+    } else {
+      pname = "created for " + uid + ", by Explore Spotify";
+    }
+
     let pid = "";
     await axios({
       method: "POST",
@@ -171,7 +178,7 @@ const spotifyHelpers = {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       data: {
-        name: "created for " + uname ? uname : uid + ", by Explore Spotify",
+        name: pname,
         public: false,
       },
       json: true,

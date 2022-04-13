@@ -40,7 +40,9 @@ const authHelpers = {
     }).then(res => {
       if (res) {
         document.cookie = "spotiUID=" + res.data.id + ";max-age=3600;samesite=lax;Secure";
-        document.cookie = "spotiUN=" + res.data.display_name + ";max-age=3600;samesite=lax;Secure";
+        if (res.data.display_name) {
+          document.cookie = "spotiUN=" + res.data.display_name + ";max-age=3600;samesite=lax;Secure";
+        }
       }
     })
   },
